@@ -1,16 +1,17 @@
-# campo_minado
+<h1 align="center">CAMPO MINADO</h1>
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<p align="center">
+<img width="" height="270" src="assets/images/campo_minado.gif"/>
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+### » Sobre o Desafio:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Precisando ajustar o layout do tabuleiro para compor todos os campos na tela, sem necessidade de rolagem.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Autor
+
+<img alt="Luiz Carlos" title="Luiz Carlos" src="https://avatars.githubusercontent.com/u/29442285?s=96&v=4" height="100" width="100" />
+
+[![LinkedIn Badge](https://img.shields.io/badge/-LUIZ_CARLOS-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/luizzlcs/)](https://www.linkedin.com/in/luizzlcs/)
