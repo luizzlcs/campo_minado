@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class Counter extends ChangeNotifier {
+class ControllerCount extends ChangeNotifier {
   int _count = 15;
 
   int get count => _count;

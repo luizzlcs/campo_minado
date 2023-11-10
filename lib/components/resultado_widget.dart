@@ -1,4 +1,4 @@
-import 'package:campo_minado/components/counter.dart';
+import 'package:campo_minado/components/controller_count.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class ResultadoWidget extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _ResultadoWidgetState extends State<ResultadoWidget> {
-  final counter = Counter();
+  final counter = ControllerCount();
   Color? _getCor() {
     if (widget.venceu == null) {
       return Colors.yellow;
@@ -42,7 +42,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
   }
 
   retunrInt() {
-    final counter = Counter();
+    final counter = ControllerCount();
     final inteiro = counter.count;
     return inteiro.toString();
   }
@@ -66,7 +66,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                         tooltip: 'Aumentar',
                         onPressed: () {
                           widget.onReiniciar!();
-                          context.read<Counter>().incremetCount();
+                          context.read<ControllerCount>().incremetCount();
                         },
                         icon: const RotatedBox(
                           quarterTurns: 90,
@@ -84,7 +84,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                             animation: counter,
                             builder: (context, child) {
                               return Text(
-                                '${context.watch<Counter>().count}',
+                                '${context.watch<ControllerCount>().count}',
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
@@ -97,7 +97,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                       IconButton(                        
                         tooltip: 'Diminuir',
                         onPressed: () {
-                          context.read<Counter>().decrementCount();
+                          context.read<ControllerCount>().decrementCount();
                           widget.onReiniciar!();
                         },
                         icon: const Icon(Icons.expand_circle_down_outlined),

@@ -1,4 +1,4 @@
-import 'package:campo_minado/components/counter.dart';
+import 'package:campo_minado/components/controller_count.dart';
 import 'package:campo_minado/components/resultado_widget.dart';
 import 'package:campo_minado/components/tabuleiro.widget.dart';
 import 'package:campo_minado/models/campo.dart';
@@ -58,8 +58,8 @@ class _CampoMinadoAppState extends State<CampoMinadoApp> {
 
   Tabuleiro _getTabuleiro(double largura, double altura) {
     debugPrint(
-        'CONTADOR DE BOMBAS NO TABULEIRO: ${context.watch<Counter>().count}');
-    final bombas = context.watch<Counter>().count;
+        'CONTADOR DE BOMBAS NO TABULEIRO: ${context.watch<ControllerCount>().count}');
+    final bombas = context.watch<ControllerCount>().count;
     debugPrint('CONTADOR DE BOMBAS variável BOMBA: $bombas');
     if (_tabuleiro == null) {
       int qtdColunas = 15;
@@ -69,7 +69,7 @@ class _CampoMinadoAppState extends State<CampoMinadoApp> {
       _tabuleiro = Tabuleiro(
           linhas: qtdLinhas,
           colunas: qtdColunas,
-          qtdBombas: bombas //context.read<Counter>().count,
+          qtdBombas: bombas //context.read<ControllerCounter>().count,
           );
     }
 
@@ -78,7 +78,7 @@ class _CampoMinadoAppState extends State<CampoMinadoApp> {
 
   @override
   Widget build(BuildContext context) {
-    final contar = context.read<Counter>().count;
+    final contar = context.read<ControllerCount>().count;
     print('CONTADOR DE BOMBAS: $contar');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
