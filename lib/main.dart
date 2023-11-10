@@ -5,11 +5,23 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => ControllerCount(),)
-      ],
-      child: const CampoMinadoApp(),
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ControllerCount>(
+            create: (context) => ControllerCount(),
+          )
+        ],
+        child: LayoutBuilder(
+          builder: (context, constraints) => Consumer<ControllerCount>(
+            builder: (context, value, child) => CampoMinadoApp(
+              constraints: constraints,
+              bombas: context.watch<ControllerCount>().count,
+            ),
+          ),
+        ),
+      ),
     ),
   );
 }
