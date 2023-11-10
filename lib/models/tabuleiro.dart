@@ -13,22 +13,21 @@ class Tabuleiro {
     required this.colunas,
     required this.qtdBombas,
   }) {
+    print(this.qtdBombas);
     _criarCampos();
     _relacionarVizinhos();
     _sortearMinas();
   }
-  
- 
-  
+
   void _criarCampos() {
-    for(int l = 0; l < linhas; l++){
-      for(int c = 0; c < colunas; c++){
+    for (int l = 0; l < linhas; l++) {
+      for (int c = 0; c < colunas; c++) {
         _campos.add(Campo(linha: l, coluna: c));
       }
     }
   }
 
-   void reiniciar() {
+  void reiniciar() {
     for (var c in _campos) {
       c.reiniciar();
     }
@@ -44,7 +43,7 @@ class Tabuleiro {
   void _relacionarVizinhos() {
     for (var campo in _campos) {
       for (var vizinho in _campos) {
-        campo.adicionarVizinho(vizinho);  
+        campo.adicionarVizinho(vizinho);
       }
     }
   }

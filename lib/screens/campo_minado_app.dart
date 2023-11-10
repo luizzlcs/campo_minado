@@ -1,14 +1,22 @@
-import 'package:campo_minado/components/controller_count.dart';
 import 'package:campo_minado/components/resultado_widget.dart';
 import 'package:campo_minado/components/tabuleiro.widget.dart';
 import 'package:campo_minado/models/campo.dart';
 import 'package:campo_minado/models/explosao_exception.dart';
 import 'package:campo_minado/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CampoMinadoApp extends StatefulWidget {
-  const CampoMinadoApp({super.key});
+  final BoxConstraints constraints;
+  final int bombas;
+  late final Tabuleiro _tabuleiro;
+
+  CampoMinadoApp({required this.constraints, required this.bombas}) {
+    int qtdColunas = 15;
+    double tamanhoDoCampo = this.constraints.maxWidth / qtdColunas;
+    int qtdLinhas = (this.constraints.maxHeight / tamanhoDoCampo).floor();
+
+    this._tabuleiro = Tabuleiro(linhas: qtdLinhas, colunas: qtdColunas, qtdBombas: bombas);
+  }
 
   @override
   State<CampoMinadoApp> createState() => _CampoMinadoAppState();
@@ -16,12 +24,13 @@ class CampoMinadoApp extends StatefulWidget {
 
 class _CampoMinadoAppState extends State<CampoMinadoApp> {
   bool? _venceu;
-  Tabuleiro? _tabuleiro;
 
-    void _reiniciar() {
+  _CampoMinadoAppState();
+
+  void _reiniciar() {
     setState(() {
       _venceu = null;
-      _tabuleiro!.reiniciar();
+      widget._tabuleiro.reiniciar();
     });
   }
 
@@ -34,12 +43,12 @@ class _CampoMinadoAppState extends State<CampoMinadoApp> {
     setState(() {
       try {
         campo.abrir();
-        if (_tabuleiro!.resolvido) {
+        if (widget._tabuleiro.resolvido) {
           _venceu = true;
         }
       } on ExplosaoException {
         _venceu = false;
-        _tabuleiro!.revelarBombas();
+        widget._tabuleiro.revelarBombas();
       }
     });
   }
@@ -50,36 +59,14 @@ class _CampoMinadoAppState extends State<CampoMinadoApp> {
     }
     setState(() {
       campo.alternarMarcacao();
-      if (_tabuleiro!.resolvido) {
+      if (widget._tabuleiro.resolvido) {
         _venceu = true;
       }
     });
   }
 
-  Tabuleiro _getTabuleiro(double largura, double altura) {
-    debugPrint(
-        'CONTADOR DE BOMBAS NO TABULEIRO: ${context.watch<ControllerCount>().count}');
-    final bombas = context.watch<ControllerCount>().count;
-    debugPrint('CONTADOR DE BOMBAS variável BOMBA: $bombas');
-    if (_tabuleiro == null) {
-      int qtdColunas = 15;
-      double tamanhoDoCampo = largura / qtdColunas;
-      int qtdLinhas = (altura / tamanhoDoCampo).floor();
-
-      _tabuleiro = Tabuleiro(
-          linhas: qtdLinhas,
-          colunas: qtdColunas,
-          qtdBombas: bombas //context.read<ControllerCounter>().count,
-          );
-    }
-
-    return _tabuleiro!;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final contar = context.read<ControllerCount>().count;
-    print('CONTADOR DE BOMBAS: $contar');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -87,17 +74,10 @@ class _CampoMinadoAppState extends State<CampoMinadoApp> {
           venceu: _venceu,
           onReiniciar: _reiniciar,
         ),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            return TabuleiroWidget(
-              tabuleiro: _getTabuleiro(
-                constraints.maxWidth,
-                constraints.maxHeight,
-              ),
-              onAbrir: _abrir,
-              onAlterMarcacao: _alternarMarcacao,
-            );
-          },
+        body: TabuleiroWidget(
+          tabuleiro: widget._tabuleiro,
+          onAbrir: _abrir,
+          onAlterMarcacao: _alternarMarcacao,
         ),
       ),
     );
