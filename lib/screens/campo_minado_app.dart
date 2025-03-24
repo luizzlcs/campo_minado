@@ -15,7 +15,8 @@ class CampoMinadoApp extends StatefulWidget {
     double tamanhoDoCampo = this.constraints.maxWidth / qtdColunas;
     int qtdLinhas = (this.constraints.maxHeight / tamanhoDoCampo).floor();
 
-    this._tabuleiro = Tabuleiro(linhas: qtdLinhas, colunas: qtdColunas, qtdBombas: bombas);
+    this._tabuleiro =
+        Tabuleiro(linhas: qtdLinhas, colunas: qtdColunas, qtdBombas: bombas);
   }
 
   @override
@@ -68,6 +69,7 @@ class _CampoMinadoAppState extends State<CampoMinadoApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Campo minado',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: ResultadoWidget(

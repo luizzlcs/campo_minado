@@ -1,4 +1,5 @@
 import 'package:campo_minado/components/controller_count.dart';
+import 'package:campo_minado/screens/how_to_play_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -94,13 +95,23 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                           ),
                         ],
                       ),
-                      IconButton(                        
+                      IconButton(
                         tooltip: 'Diminuir',
                         onPressed: () {
                           context.read<ControllerCount>().decrementCount();
                           widget.onReiniciar!();
                         },
                         icon: const Icon(Icons.expand_circle_down_outlined),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true, 
+                            builder: (context) => const HowToPlayDialog(),
+                          );
+                        },
+                        child: const Text('Como Jogar?'),
                       ),
                     ],
                   )
